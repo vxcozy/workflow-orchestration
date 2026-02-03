@@ -8,17 +8,17 @@ A [Claude Code](https://claude.ai/code) skill for disciplined, high-quality task
 
 ```bash
 # Clone to your Claude skills directory
-git clone https://github.com/YOUR_USERNAME/workflow-orchestration ~/.claude/skills/workflow-orchestration
+git clone https://github.com/vxcozy/workflow-orchestration ~/.claude/skills/workflow-orchestration
 ```
 
 ### Option 2: Project Installation (Single Project)
 
 ```bash
 # Add as a subdirectory in your project
-git clone https://github.com/YOUR_USERNAME/workflow-orchestration .claude/skills/workflow-orchestration
+git clone https://github.com/vxcozy/workflow-orchestration .claude/skills/workflow-orchestration
 
 # Or add as a git submodule
-git submodule add https://github.com/YOUR_USERNAME/workflow-orchestration .claude/skills/workflow-orchestration
+git submodule add https://github.com/vxcozy/workflow-orchestration .claude/skills/workflow-orchestration
 ```
 
 ## Usage
