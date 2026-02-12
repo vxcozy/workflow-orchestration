@@ -1,24 +1,38 @@
-# Workflow Orchestration Skill
+# Workflow Orchestration
 
-A [Claude Code](https://claude.ai/code) skill for disciplined, high-quality task execution with planning, verification, and self-improvement loops.
+A skill for disciplined AI agent task execution with planning, verification, and self-improvement loops.
+
+## Overview
+
+Workflow orchestration provides a systematic approach to complex task execution:
+
+| Practice | Purpose |
+|----------|---------|
+| **Plan Mode** | Think before acting on non-trivial tasks |
+| **Subagent Delegation** | Keep main context clean |
+| **Self-Improvement** | Learn from corrections |
+| **Verification** | Prove work is complete |
+| **Balanced Elegance** | Quality without over-engineering |
+| **Autonomous Fixing** | Reduce user burden |
 
 ## Installation
 
-### Option 1: Personal Installation (All Projects)
+### Via skills CLI (Recommended)
 
 ```bash
-# Clone to your Claude skills directory
+npx skills add vxcozy/workflow-orchestration
+```
+
+### Manual Installation
+
+**Personal (all projects):**
+```bash
 git clone https://github.com/vxcozy/workflow-orchestration ~/.claude/skills/workflow-orchestration
 ```
 
-### Option 2: Project Installation (Single Project)
-
+**Project-specific:**
 ```bash
-# Add as a subdirectory in your project
 git clone https://github.com/vxcozy/workflow-orchestration .claude/skills/workflow-orchestration
-
-# Or add as a git submodule
-git submodule add https://github.com/vxcozy/workflow-orchestration .claude/skills/workflow-orchestration
 ```
 
 ## Usage
@@ -29,47 +43,69 @@ git submodule add https://github.com/vxcozy/workflow-orchestration .claude/skill
 /workflow-orchestration
 ```
 
-### Automatic Invocation
+### Automatic
 
-Claude will automatically apply this skill when:
-- Starting non-trivial tasks (3+ steps or architectural decisions)
-- Working on bugs, features, or refactoring
-- Tasks require coordination between exploration, implementation, and verification
+The skill activates automatically for:
+- Non-trivial tasks (3+ steps)
+- Bug fixes and feature work
+- Refactoring and architectural changes
 
-## What's Included
+## Documentation
 
-### Core Practices
+This skill uses [Diataxis](https://diataxis.fr)-style documentation:
 
-| Practice | Description |
-|----------|-------------|
-| **Plan Mode Default** | Enter plan mode for any non-trivial task |
-| **Subagent Strategy** | Offload research and exploration to keep context clean |
-| **Self-Improvement Loop** | Capture lessons after corrections in `tasks/lessons.md` |
-| **Verification Before Done** | Never mark complete without proving it works |
-| **Demand Elegance** | Balance quality with pragmatism |
-| **Autonomous Bug Fixing** | Just fix it—no hand-holding required |
+| Type | Purpose | Link |
+|------|---------|------|
+| **Tutorial** | Learn by doing | [docs/tutorial.md](docs/tutorial.md) |
+| **How-To** | Solve specific problems | [docs/howto.md](docs/howto.md) |
+| **Reference** | Technical details | [references/REFERENCE.md](references/REFERENCE.md) |
+| **Explanation** | Understand concepts | [docs/explanation.md](docs/explanation.md) |
 
-### Task Management
+### Additional References
 
-The skill uses two tracking files:
-
-- `tasks/todo.md` - Planning and progress tracking
-- `tasks/lessons.md` - Captured learnings from corrections
-
-### Core Principles
-
-- **Simplicity First** - Make every change as simple as possible
-- **No Laziness** - Find root causes, no temporary fixes
-- **Minimal Impact** - Only touch what's necessary
+- [Task Templates](references/task-templates.md) - Ready-to-use todo.md formats
+- [Lessons Format](references/lessons-format.md) - How to capture learnings
 
 ## File Structure
 
 ```
 workflow-orchestration/
-├── SKILL.md          # Main skill definition
-├── README.md         # This file
-└── LICENSE           # MIT License
+├── SKILL.md                    # Main skill (loaded by agents)
+├── docs/
+│   ├── tutorial.md             # Learning-oriented guide
+│   ├── howto.md                # Task-oriented guides
+│   └── explanation.md          # Understanding-oriented
+├── references/
+│   ├── REFERENCE.md            # Complete reference
+│   ├── task-templates.md       # Todo file templates
+│   └── lessons-format.md       # Lessons file format
+├── README.md
+└── LICENSE
 ```
+
+## Quick Start
+
+1. Install the skill
+2. Start a non-trivial task
+3. Create `tasks/todo.md` with your plan
+4. Execute with progress tracking
+5. Verify before marking complete
+6. Capture lessons after corrections
+
+## Core Principles
+
+- **Simplicity First** - Minimal changes, minimal code
+- **No Laziness** - Find root causes, no temporary fixes
+- **Minimal Impact** - Only touch what's necessary
+
+## Compatibility
+
+Works with any [Agent Skills](https://agentskills.io)-compatible agent:
+- Claude Code
+- Cursor
+- GitHub Copilot
+- Gemini CLI
+- And [many more](https://agentskills.io)
 
 ## License
 
