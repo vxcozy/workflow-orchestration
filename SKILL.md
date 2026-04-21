@@ -1,11 +1,16 @@
 ---
 name: workflow-orchestration
-description: |
-  Disciplined task execution with planning, verification, and self-improvement loops.
-  Use when starting non-trivial tasks (3+ steps), fixing bugs, building features,
-  refactoring code, or when rigorous execution with quality gates is needed.
-  Includes subagent delegation, lessons tracking, and staff-engineer-level verification.
+description: "Structured multi-step task execution with plan-first workflow, progress tracking in tasks/todo.md, lessons capture in tasks/lessons.md, subagent delegation for parallel work, and verification gates before task completion. Use when the user requests a step-by-step plan, asks to track progress, needs multi-step implementation (3+ steps), wants verification checkpoints, or says 'plan this', 'break this down', or 'track this task'. Do not activate for single-step fixes, quick questions, or simple one-line changes."
 license: MIT
+user-invocable: true
+triggers:
+  - plan this task
+  - break this down into steps
+  - track my progress
+  - step by step implementation
+  - multi-step task
+  - structured workflow
+  - verify before completing
 metadata:
   author: vxcozy
   version: "1.0.0"
@@ -13,7 +18,7 @@ metadata:
 
 # Workflow Orchestration
 
-Apply these practices for disciplined, high-quality task execution.
+Structured multi-step task execution with planning, verification, and continuous improvement.
 
 ## Quick Reference
 
@@ -27,61 +32,70 @@ Apply these practices for disciplined, high-quality task execution.
 
 ## 1. Plan Mode Default
 
-- Enter plan mode for ANY non-trivial task (3+ steps or architectural decisions)
-- If something goes sideways, STOP and re-plan immediately
+- Enter plan mode for ANY task with 3+ steps or architectural decisions
+- If the approach breaks down mid-task, STOP and re-plan immediately
 - Use plan mode for verification steps, not just building
 - Write detailed specs upfront to reduce ambiguity
 
 ## 2. Subagent Strategy
 
-Keep the main context window clean:
-
-- Offload research, exploration, and parallel analysis to subagents
-- For complex problems, throw more compute at it via subagents
-- One task per subagent for focused execution
+- Delegate research, exploration, and parallel analysis to subagents
+- For complex problems, run multiple subagents in parallel
+- One task per subagent with clear instructions and expected output format
+- Template: `Agent({ description: "Search auth patterns", prompt: "Find all authentication middleware in src/ and list file paths with a one-line summary of each" })`
 
 ## 3. Self-Improvement Loop
 
 After ANY correction from the user:
 
-1. Update `tasks/lessons.md` with the pattern
-2. Write rules that prevent the same mistake
-3. Review lessons at session start
+1. Update `tasks/lessons.md` with the mistake, root cause, and prevention rule
+2. Write rules that prevent the same mistake in future sessions
+3. Review lessons at session start to avoid repeating errors
 
-See [references/lessons-format.md](references/lessons-format.md) for the template.
+**Inline example** (full template in [references/lessons-format.md](references/lessons-format.md)):
+
+```markdown
+## 2024-01-10 - Testing
+**Mistake**: Mocks hid real API behavior; production broke
+**Pattern**: Over-mocking created false confidence
+**Rule**: Include at least one integration test hitting real services
+**Applied**: All API endpoints, external service integrations
+```
 
 ## 4. Verification Before Done
 
 - Never mark a task complete without proving it works
 - Diff behavior between main and your changes when relevant
-- Ask yourself: "Would a staff engineer approve this?"
-- Run tests, check logs, demonstrate corrections
+- Run tests, check logs, demonstrate the fix or feature working
+- If verification fails → return to the plan step and revise the approach before retrying
 
-## 5. Demand Elegance (Balanced)
+## 5. Elegance Gate
 
-- For non-trivial changes: pause and ask "is there a more elegant way?"
-- If a fix feels hacky: "Knowing everything I know now, implement the elegant solution"
-- Skip this for simple, obvious fixes—don't over-engineer
+For changes touching 5+ files or when the solution feels forced: pause and evaluate simpler alternatives before proceeding.
 
 ## 6. Autonomous Bug Fixing
 
-- When given a bug report: Just fix it. Don't ask for hand-holding
-- Point at logs, errors, failing tests—then resolve them
-- Zero context switching required from the user
+Reproduce → identify root cause → implement fix → verify resolved.
 
 ## Task Management Protocol
 
 1. **Plan First**: Write plan to `tasks/todo.md` with checkable items
-2. **Verify Plan**: Check in before starting implementation
+2. **Verify Plan**: Confirm approach with user before starting
 3. **Track Progress**: Mark items complete as you go
-4. **Explain Changes**: High-level summary at each step
-5. **Document Results**: Add review to `tasks/todo.md`
-6. **Capture Lessons**: Update `tasks/lessons.md` after corrections
+4. **Explain Changes**: Provide a high-level summary at each step
+5. **Verify Results**: Run tests and confirm behavior before marking done
+6. **Handle Failures**: If verification fails → re-plan (step 1), don't push through
+7. **Document Results**: Add a review summary to `tasks/todo.md`
+8. **Capture Lessons**: Update `tasks/lessons.md` after any corrections
 
-See [references/task-templates.md](references/task-templates.md) for file templates.
+**Inline example** (full templates in [references/task-templates.md](references/task-templates.md)):
 
-## Core Principles
+```markdown
+# Task: Fix memory leak in WebSocket handler
+## Plan
+- [ ] Reproduce the issue locally
+- [ ] Identify leak source with profiler
+- [ ] Implement fix
+- [ ] Verification: Memory stable over 1000 connections
+```
 
-- **Simplicity First**: Make every change as simple as possible
-- **No Laziness**: Find root causes. No temporary fixes. Senior developer standards
-- **Minimal Impact**: Only touch what's necessary. Avoid introducing bugs
