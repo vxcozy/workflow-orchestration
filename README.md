@@ -11,7 +11,7 @@ Workflow orchestration provides a systematic approach to complex task execution:
 | **Plan Mode** | Think before acting on non-trivial tasks |
 | **Subagent Delegation** | Keep main context clean |
 | **Self-Improvement** | Learn from corrections |
-| **Verification** | Prove work is complete |
+| **Verification** | Prove work is complete; re-plan if it fails |
 | **Balanced Elegance** | Quality without over-engineering |
 | **Autonomous Fixing** | Reduce user burden |
 
@@ -89,7 +89,7 @@ workflow-orchestration/
 2. Start a non-trivial task
 3. Create `tasks/todo.md` with your plan
 4. Execute with progress tracking
-5. Verify before marking complete
+5. Verify before marking complete (if verification fails, return to planning)
 6. Capture lessons after corrections
 
 ## Core Principles
